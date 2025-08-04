@@ -1,0 +1,66 @@
+<?php
+/**
+ * @var $this Laminas\View\Renderer\PhpRenderer
+ */
+?>
+<h1>Indicadores</h1>
+<table>
+<thead>
+<tr>
+<th>Indicador</th>
+<th>&nbsp;</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Total de órgãos</td>
+<td>&nbsp;</td>
+<td><?=$this->total_orgaos?></td>
+</tr>
+<tr>
+<td>Compra software proprietário e não justifica</td>
+<td>&nbsp;</td>
+<td><?=$this->total_compra . ' (' . round($this->total_compra/$this->total_orgaos*100,2) . '%)'?></td>
+</tr>
+<tr>
+<td>Justifica a compra de software proprietário</td>
+<td>&nbsp;</td>
+<td><?=$this->total_justifica . ' (' . round($this->total_justifica/$this->total_orgaos*100,2) . '%)'?></td>
+</tr>
+<tr>
+<td>Não forneceu resposta</td>
+<td>&nbsp;</td>
+<td><?=$this->total_sem_resposta . ' (' . round($this->total_sem_resposta/$this->total_orgaos*100,2) . '%)' ?></td>
+</tr>
+<tr>
+<td>Depende de avaliação técnica</td>
+<td>&nbsp;</td>
+<td><?=$this->total_depende_de_avaliacao . ' (' . round($this->total_depende_de_avaliacao/$this->total_orgaos*100,2) . '%)'?></td>
+</tr>
+<tr>
+<td>Desenvolveu software livre</td>
+<td>&nbsp;</td>
+<td><?=$this->total_desenvolveu_floss  . ' (' . round($this->total_desenvolveu_floss/$this->total_orgaos*100,2) . '%)'?></td>
+</tr>
+<tr>
+<td>Total de softwares</td>
+<td>&nbsp;</td>
+<td><?=$this->total_softwares_livres + $this->total_softwares_nao_livres?></td>
+</tr>
+
+<tr>
+<td>Total de softwares livres</td>
+<td>&nbsp;</td>
+<td><?=$this->total_softwares_livres?></td>
+</tr>
+<tr>
+<td>Total de softwares não livres</td>
+<td>&nbsp;</td>
+<td><?=$this->total_softwares_nao_livres?></td>
+</tr>
+</tbody>
+</table>
+<p>
+<a href="<?=$this->url('home')?>">Homepage</a>
+</p>
