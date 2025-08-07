@@ -22,13 +22,12 @@ class IndicadorController extends AbstractActionController
     {
         $totais = [];
         $totais['total_orgaos'] = $this->orgaoTable->getTotalDeOrgaos();
-        $totais['total_compra'] = $this->orgaoTable->getTotalCompraSoftwareProprietario();
-        $totais['total_justifica'] = $this->orgaoTable->getTotalJustificaCompra();
-        $totais['total_sem_resposta'] = $this->orgaoTable->getTotalSemResposta();
-        $totais['total_depende_de_avaliacao'] = $this->orgaoTable->getTotalDependeDeAvaliacao();
         $totais['total_desenvolveu_floss'] = $this->orgaoTable->getTotalDesenvolveuFloss();
         $totais['total_softwares_livres'] = $this->softwareTable->getTotalDeSoftwaresLivres();
         $totais['total_softwares_nao_livres'] = $this->softwareTable->getTotalDeSoftwaresNaoLivres();
+        $totais['total_softwares_livres_usados'] = $this->softwareTable->getTotalDeSoftwaresLivresUsados();
+        $totais['total_softwares_nao_livres_usados'] = $this->softwareTable->getTotalDeSoftwaresNaoLivresUsados();
+
         
         return new ViewModel($totais);
     }

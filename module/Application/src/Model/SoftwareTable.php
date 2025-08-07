@@ -6,6 +6,8 @@ use Laminas\Db\ResultSet\ResultSetInterface;
 use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Where;
 use Laminas\Db\Sql\Expression;
+use Laminas\Db\Sql\Predicate\Expression as PredicateExpression;
+use Laminas\Db\TableGateway\TableGateway;
 
 class SoftwareTable extends AbstractTableGateway
 {
@@ -80,6 +82,56 @@ class SoftwareTable extends AbstractTableGateway
         $select->columns(['total_softwares' => new Expression('count(*)')]);
         $select->join('licenca', 'software.codigo_licenca=licenca.codigo',[]);
         $select->where(['licenca.livre' => false]);
+        $resultSet = $this->tableGateway->selectWith($select);
+        return $resultSet->current()->total_softwares ?? 0;
+    }
+
+    /**
+     *
+     * @return \Laminas\Db\Sql\Select
+     */
+    public function getTotalDeSoftwaresLivresUsados()
+    {
+        $tableGateway = new TableGateway('software_orgao',$this->tableGateway->getAdapter());
+        $subSelect = new Select($tableGateway->getTable());
+        $subSelect->columns(['codigo' => new Expression('distinct codigo_software')]);
+        $resultSet = $tableGateway->selectWith($subSelect);
+        $codigos = [];
+        foreach($resultSet as $row){
+            $codigos[] = $row['codigo'];
+        }
+        $select = new Select($this->tableGateway->getTable());
+        $select->columns(['total_softwares' => new Expression('count(*)')]);
+        $select->join('licenca', 'software.codigo_licenca=licenca.codigo',[]);
+        $where = new Where();
+        $where->equalTo('licenca.livre',true);
+        $where->in('software.codigo',$codigos);
+        $select->where($where);
+        $resultSet = $this->tableGateway->selectWith($select);
+        return $resultSet->current()->total_softwares ?? 0;
+    }
+    
+    /**
+     *
+     * @return \Laminas\Db\Sql\Select
+     */
+    public function getTotalDeSoftwaresNaoLivresUsados()
+    {
+        $tableGateway = new TableGateway('software_orgao',$this->tableGateway->getAdapter());
+        $subSelect = new Select($tableGateway->getTable());
+        $subSelect->columns(['codigo' => new Expression('distinct codigo_software')]);
+        $resultSet = $tableGateway->selectWith($subSelect);
+        $codigos = [];
+        foreach($resultSet as $row){
+            $codigos[] = $row['codigo'];
+        }
+        $select = new Select($this->tableGateway->getTable());
+        $select->columns(['total_softwares' => new Expression('count(*)')]);
+        $select->join('licenca', 'software.codigo_licenca=licenca.codigo',[]);
+        $where = new Where();
+        $where->equalTo('licenca.livre',false);
+        $where->in('software.codigo',$codigos);
+        $select->where($where);
         $resultSet = $this->tableGateway->selectWith($select);
         return $resultSet->current()->total_softwares ?? 0;
     }

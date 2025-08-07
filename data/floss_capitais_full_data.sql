@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 04/08/2025 às 14:18
+-- Tempo de geração: 07/08/2025 às 16:43
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `floss_capitais`
 --
+CREATE DATABASE IF NOT EXISTS `floss_capitais` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `floss_capitais`;
 
 -- --------------------------------------------------------
 
@@ -412,47 +414,42 @@ CREATE TABLE `orgao` (
   `codigo` int(11) NOT NULL,
   `nome` varchar(80) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `tipo_orgao` int(11) NOT NULL,
-  `compra` tinyint(1) NOT NULL DEFAULT 0,
-  `justifica` tinyint(1) NOT NULL DEFAULT 0,
-  `semresposta` tinyint(1) NOT NULL DEFAULT 0,
-  `depende` tinyint(1) NOT NULL DEFAULT 0,
   `sigla` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `desenvolveusl` tinyint(1) NOT NULL DEFAULT 0,
-  `pedidos` tinyint(4) NOT NULL DEFAULT 1
+  `desenvolveusl` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Despejando dados para a tabela `orgao`
 --
 
-INSERT INTO `orgao` (`codigo`, `nome`, `tipo_orgao`, `compra`, `justifica`, `semresposta`, `depende`, `sigla`, `desenvolveusl`, `pedidos`) VALUES
-(169, 'Rio Branco', 1, 0, 0, 0, 0, 'AC', 0, 0),
-(170, 'Maceió', 1, 0, 0, 0, 0, 'AL', 0, 0),
-(171, 'Manaus', 1, 0, 0, 0, 0, 'AM', 0, 0),
-(172, 'Macapá', 1, 0, 0, 0, 0, 'AP', 0, 0),
-(173, 'Salvador', 1, 0, 0, 0, 0, 'BA', 0, 0),
-(174, 'Fortaleza', 1, 0, 0, 0, 0, 'CE', 0, 0),
-(175, 'Brasília', 1, 0, 0, 0, 0, 'DF', 0, 0),
-(176, 'Vitória', 1, 0, 0, 0, 0, 'ES', 0, 0),
-(177, 'Goiânia', 1, 0, 0, 0, 0, 'GO', 0, 0),
-(178, 'São Luís', 1, 0, 0, 0, 0, 'MA', 0, 0),
-(179, 'Belo Horizonte', 1, 0, 0, 0, 0, 'MG', 0, 0),
-(180, 'Campo Grande', 1, 0, 0, 0, 0, 'MS', 0, 0),
-(181, 'Cuiabá', 1, 0, 0, 0, 0, 'MT', 0, 0),
-(182, 'Belém', 1, 0, 0, 0, 0, 'PA', 0, 0),
-(183, 'João Pessoa', 1, 0, 0, 0, 0, 'PB', 0, 0),
-(184, 'Curitiba', 1, 0, 0, 0, 0, 'PR', 0, 0),
-(185, 'Recife', 1, 0, 0, 0, 0, 'PE', 0, 0),
-(186, 'Teresina', 1, 0, 0, 0, 0, 'PI', 0, 0),
-(187, 'Rio de Janeiro', 1, 0, 0, 0, 0, 'RJ', 0, 0),
-(188, 'Natal', 1, 0, 0, 0, 0, 'RN', 0, 0),
-(189, 'Porto Velho', 1, 0, 0, 0, 0, 'RO', 0, 0),
-(190, 'Boa Vista', 1, 0, 0, 0, 0, 'Roraima', 0, 0),
-(191, 'Porto Alegre', 1, 0, 0, 0, 0, 'RS', 0, 0),
-(192, 'Florianópolis', 1, 0, 0, 0, 0, 'SC', 0, 0),
-(193, 'Aracaju', 1, 0, 0, 0, 0, 'SE', 0, 0),
-(194, 'São Paulo', 1, 0, 0, 0, 0, 'SP', 0, 0),
-(195, 'Palmas', 1, 0, 0, 0, 0, 'TO', 0, 0);
+INSERT INTO `orgao` (`codigo`, `nome`, `tipo_orgao`, `sigla`, `desenvolveusl`) VALUES
+(169, 'Rio Branco', 1, 'AC', 0),
+(170, 'Maceió', 1, 'AL', 0),
+(171, 'Manaus', 1, 'AM', 0),
+(172, 'Macapá', 1, 'AP', 0),
+(173, 'Salvador', 1, 'BA', 0),
+(174, 'Fortaleza', 1, 'CE', 0),
+(175, 'Brasília', 1, 'DF', 0),
+(176, 'Vitória', 1, 'ES', 0),
+(177, 'Goiânia', 1, 'GO', 0),
+(178, 'São Luís', 1, 'MA', 0),
+(179, 'Belo Horizonte', 1, 'MG', 0),
+(180, 'Campo Grande', 1, 'MS', 0),
+(181, 'Cuiabá', 1, 'MT', 0),
+(182, 'Belém', 1, 'PA', 0),
+(183, 'João Pessoa', 1, 'PB', 0),
+(184, 'Curitiba', 1, 'PR', 0),
+(185, 'Recife', 1, 'PE', 0),
+(186, 'Teresina', 1, 'PI', 0),
+(187, 'Rio de Janeiro', 1, 'RJ', 0),
+(188, 'Natal', 1, 'RN', 0),
+(189, 'Porto Velho', 1, 'RO', 0),
+(190, 'Boa Vista', 1, 'Roraima', 0),
+(191, 'Porto Alegre', 1, 'RS', 0),
+(192, 'Florianópolis', 1, 'SC', 0),
+(193, 'Aracaju', 1, 'SE', 0),
+(194, 'São Paulo', 1, 'SP', 0),
+(195, 'Palmas', 1, 'TO', 0);
 
 -- --------------------------------------------------------
 
