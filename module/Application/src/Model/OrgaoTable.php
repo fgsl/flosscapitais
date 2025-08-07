@@ -82,58 +82,6 @@ class OrgaoTable extends AbstractTableGateway
      *
      * @return \Laminas\Db\Sql\Select
      */
-    public function getTotalCompraSoftwareProprietario()
-    {
-        $select = new Select($this->tableGateway->getTable());
-        $select->columns(['total_compra' => new Expression('count(compra)')]);
-        $select->where(['compra' => true]);
-        $resultSet = $this->tableGateway->selectWith($select);
-        return $resultSet->current()->total_compra ?? 0;
-    }
-    
-    /**
-     *
-     * @return \Laminas\Db\Sql\Select
-     */
-    public function getTotalJustificaCompra()
-    {
-        $select = new Select($this->tableGateway->getTable());
-        $select->columns(['total_justifica' => new Expression('count(justifica)')]);
-        $select->where(['justifica' => true]);
-        $resultSet = $this->tableGateway->selectWith($select);
-        return $resultSet->current()->total_justifica ?? 0;
-    }
-    
-    /**
-     *
-     * @return \Laminas\Db\Sql\Select
-     */
-    public function getTotalSemResposta()
-    {
-        $select = new Select($this->tableGateway->getTable());
-        $select->columns(['total_sem_resposta' => new Expression('count(semresposta)')]);
-        $select->where(['semresposta' => true]);
-        $resultSet = $this->tableGateway->selectWith($select);
-        return $resultSet->current()->total_sem_resposta ?? 0;
-    }
-    
-    /**
-     *
-     * @return \Laminas\Db\Sql\Select
-     */
-    public function getTotalDependeDeAvaliacao()
-    {
-        $select = new Select($this->tableGateway->getTable());
-        $select->columns(['total_depende_de_avaliacao' => new Expression('count(depende)')]);
-        $select->where(['depende' => true]);
-        $resultSet = $this->tableGateway->selectWith($select);
-        return $resultSet->current()->total_depende_de_avaliacao ?? 0;
-    }
-    
-    /**
-     *
-     * @return \Laminas\Db\Sql\Select
-     */
     public function getTotalDesenvolveuFloss()
     {
         $select = new Select($this->tableGateway->getTable());

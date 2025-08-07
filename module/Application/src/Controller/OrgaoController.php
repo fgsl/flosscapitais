@@ -36,16 +36,6 @@ class OrgaoController extends AbstractCrudController
         return (empty($key) ? 'Incluir ' : 'Alterar ') . 'Órgão';
     }
     
-    protected function getPost(): \ArrayObject
-    {
-        $post = $this->getRequest()->getPost();
-        $post['compra'] = (bool) $post['compra'];
-        $post['justifica'] = (bool) $post['justifica'];
-        $post['semresposta'] = (bool) $post['semresposta'];
-        $post['depende'] = (bool) $post['depende'];
-        return $post;
-    }
-    
     protected function getSelect(): Select
     {
         $nome = $this->getRequest()->getPost('nome');
@@ -70,4 +60,14 @@ class OrgaoController extends AbstractCrudController
         $alternativeSelect = $this->table->getSelectByAcronym($this->getRequest()->getPost('sigla'));
         return $this->getPaginator($alternativeSelect);
     }
+
+    protected function getPost(): \ArrayObject
+    {
+        $post = $this->getRequest()->getPost();
+
+        $post['desenvolveusl'] = (bool)$post['desenvolveusl'];
+
+        return $post;
+    }
+
 }
