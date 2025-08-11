@@ -67,6 +67,7 @@ class SoftwareDeOrgaoTable extends AbstractTableGateway
         $select = new Select($this->tableGateway->getTable());
         $select->join('software', 'software.codigo=software_orgao.codigo_software',['software' => 'nome']);
         $select->join('orgao', 'orgao.codigo=software_orgao.codigo_orgao',['orgao' => 'nome']);
+        $select->order('software.nome');
         return $select;
     }
     
